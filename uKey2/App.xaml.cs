@@ -13,10 +13,12 @@ namespace uKey2
     public partial class App : Application
     {
         private uNotifyIconWrapper uNotifyIcon;
+        private uCore uCore;
 
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+            uCore = new uCore();
             uNotifyIcon = new uNotifyIconWrapper();
         }
 
