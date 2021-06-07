@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Threading;
+using NAudio.CoreAudioApi;
 
 namespace uKey2
 {
@@ -32,6 +33,9 @@ namespace uKey2
 
         static int ID_BASE = 10000;
         private int mRegistCount = 0;
+        private MMDevice mMMCaptureDevice;
+
+        Func<uCore.ListenerState, int, int> mLIstener;
 
         private class KeyBind
         {
@@ -49,11 +53,17 @@ namespace uKey2
         }
         List<KeyBind> keyBinds = new List<KeyBind>();
 
-        public uKey(IntPtr _hWnd)
+        public uKey(IntPtr _hWnd, Func<uCore.ListenerState, int, int> listener)
         {
             this.proc = new ParameterizedThreadStart(raiseHotKeyPush);
             mhWnd = _hWnd;
+
+            MMDeviceEnumerator deviceEnumerator = new MMDeviceEnumerator();
+            mMMCaptureDevice = deviceEnumerator.GetDefaultAudioEndpoint(DataFlow.Capture, Role.Multimedia);
+
+            mLIstener = listener;
         }
+
 
         ~uKey()
         {
@@ -72,6 +82,15 @@ namespace uKey2
             if(targetBind != null)
             {
                 SendMessage(targetBind.message, targetBind.wParam, targetBind.lParam);
+
+                //  マイク状態の変更
+                if(targetBind.message == 0x0319)
+                {
+                    if(targetBind.lParam == 0x180000)
+                    {
+                        mLIstener(uCore.ListenerState.MIC_MUTE, mMMCaptureDevice.AudioEndpointVolume.Mute ? 1 : 0);
+                    }
+                }
             }
         }
 

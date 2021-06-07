@@ -1,11 +1,11 @@
 ﻿{
   "Settings": [
     {
-      "control" :  true,
-      "key":  "D0",
+      "control": true,
+      "key": "D0",
       "message": 793,
       "wParam": 0,
-      "lParam": 524288
+      "lParam": 1572864
     }
   ]
 }

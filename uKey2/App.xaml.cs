@@ -18,8 +18,8 @@ namespace uKey2
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            uCore = new uCore();
             uNotifyIcon = new uNotifyIconWrapper();
+            uCore = new uCore(ref uNotifyIcon);
         }
 
         protected override void OnExit(ExitEventArgs e)

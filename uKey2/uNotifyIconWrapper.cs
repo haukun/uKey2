@@ -28,5 +28,11 @@ namespace uKey2
         {
             App.Current.Shutdown();
         }
+
+        public void SetMicOn(bool on = true)
+        {
+            this.micOnIcon.Visible = on;
+            this.micOffIcon.Visible = !on;
+        }
     }
 }

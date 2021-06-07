@@ -1,3 +1,4 @@
 /uKey2/bin
 /uKey2/obj
 *.suo
+packages/
