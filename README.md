@@ -1,5 +1,6 @@
 # uKey2
 Useful key Version 2
+http://ukey.projectroom.jp/
 
 # 概要(Overview)
 Windowsにて、ホットキーとWIN32の[SendMessage](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-sendmessage)を紐づけることができるツールです。
@@ -18,7 +19,7 @@ JSONフォーマットで記載してください。
 It is a file that describes the cooperation between hotkeys and SendMessage.
 Please edit in JSON format.
 
-### キー
+### キー(Keys)
 - Settings
   - shift
     - true / false(デフォルト)
